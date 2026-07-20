@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">애니타임</string>
+    <string name="airing_channel_name">방영 알림</string>
+    <string name="airing_channel_desc">찜한 애니메이션 방영 시작 알림</string>
+</resources>
