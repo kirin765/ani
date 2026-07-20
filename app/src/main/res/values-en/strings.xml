@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">AniTime</string>
+    <string name="airing_channel_name">Airing alerts</string>
+    <string name="airing_channel_desc">Alerts when a favorited anime starts airing</string>
+
+    <string name="day_sun">Sun</string>
+    <string name="day_mon">Mon</string>
+    <string name="day_tue">Tue</string>
+    <string name="day_wed">Wed</string>
+    <string name="day_thu">Thu</string>
+    <string name="day_fri">Fri</string>
+    <string name="day_sat">Sat</string>
+    <string name="day_other">Other</string>
+    <string name="day_new">New</string>
+
+    <string name="notif_airing_title">Airing soon: %1$s</string>
+    <string name="notif_airing_text">Starts today at %1$s. Don\'t miss it!</string>
+
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_search">Browse</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="title_schedule">Anime Schedule</string>
+    <string name="title_search">Browse</string>
+    <string name="title_favorites">My Favorites</string>
+
+    <string name="cd_add_favorite">Add to favorites</string>
+    <string name="cd_remove_favorite">Remove from favorites</string>
+    <string name="cd_favorite">Favorite</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_clear">Clear</string>
+    <string name="cd_open_caption">Open subtitles</string>
+
+    <string name="status_airing">On air</string>
+    <string name="status_break">On break</string>
+    <plurals name="caption_count">
+        <item quantity="one">%1$d subtitle</item>
+        <item quantity="other">%1$d subtitles</item>
+    </plurals>
+
+    <string name="action_retry">Try again</string>
+
+    <string name="detail_title">Details</string>
+    <string name="detail_label_airing">Airs</string>
+    <string name="detail_label_status">Status</string>
+    <string name="detail_label_period">Period</string>
+    <string name="detail_label_genre">Genres</string>
+    <string name="detail_official_site">Official website</string>
+    <string name="detail_captions_section">Subtitle groups</string>
+    <string name="detail_captions_empty">No subtitles listed yet.</string>
+    <string name="detail_episode_special">Movie / Special</string>
+    <string name="detail_episode_number">Ep. %1$s</string>
+    <string name="detail_caption_pending">Pending</string>
+
+    <string name="favorites_empty_title">No favorites yet</string>
+    <string name="favorites_empty_subtitle">Tap the heart on the schedule\nto get airing alerts.</string>
+    <string name="favorites_notify_on">Alert 10 minutes before airing</string>
+    <string name="favorites_notify_unsupported">Alerts aren\'t available for this schedule</string>
+
+    <string name="schedule_empty_title">Nothing scheduled</string>
+    <string name="schedule_empty_subtitle">Try another day of the week.</string>
+
+    <string name="search_placeholder">Search anime titles</string>
+    <string name="search_empty_title">No results</string>
+    <string name="search_empty_subtitle">Try a different title or genre.</string>
+
+    <string name="error_schedule_load">Couldn\'t load the schedule. Check your connection.</string>
+    <string name="error_data_load">Couldn\'t load the data.</string>
+    <string name="error_anime_not_found">Anime not found.</string>
+    <string name="error_anime_load">Couldn\'t load the anime info.</string>
+    <string name="error_captions_load">Couldn\'t load the subtitle list.</string>
+</resources>

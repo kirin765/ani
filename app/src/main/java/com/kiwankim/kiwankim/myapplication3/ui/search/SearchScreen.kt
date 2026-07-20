@@ -23,10 +23,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.ui.AppViewModelProvider
 import com.kiwankim.kiwankim.myapplication3.ui.UiState
 import com.kiwankim.kiwankim.myapplication3.ui.components.AnimeCard
@@ -52,12 +54,12 @@ fun SearchScreen(
             value = query,
             onValueChange = viewModel::onQueryChange,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
-            placeholder = { Text("애니 제목 검색") },
+            placeholder = { Text(stringResource(R.string.search_placeholder)) },
             leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
             trailingIcon = {
                 if (query.isNotEmpty()) {
                     IconButton(onClick = { viewModel.onQueryChange("") }) {
-                        Icon(Icons.Filled.Close, contentDescription = "지우기")
+                        Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.cd_clear))
                     }
                 }
             },
@@ -88,10 +90,14 @@ fun SearchScreen(
 
         when (val s = results) {
             is UiState.Loading -> LoadingState()
-            is UiState.Error -> ErrorState(s.message, onRetry = viewModel::retry)
+            is UiState.Error -> ErrorState(s.messageRes, onRetry = viewModel::retry)
             is UiState.Success -> {
                 if (s.data.isEmpty()) {
-                    EmptyState("🔍", "검색 결과가 없어요", "다른 제목이나 장르로 찾아보세요.")
+                    EmptyState(
+                        "🔍",
+                        stringResource(R.string.search_empty_title),
+                        stringResource(R.string.search_empty_subtitle),
+                    )
                 } else {
                     LazyColumn(
                         contentPadding = PaddingValues(16.dp),

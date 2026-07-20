@@ -30,10 +30,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.domain.Anime
 import com.kiwankim.kiwankim.myapplication3.ui.theme.Amber
 import com.kiwankim.kiwankim.myapplication3.ui.theme.Mint
@@ -73,7 +76,9 @@ fun AnimeCard(
                     IconButton(onClick = onToggleFavorite, modifier = Modifier.size(32.dp)) {
                         Icon(
                             imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                            contentDescription = if (isFavorite) "찜 해제" else "찜하기",
+                            contentDescription = stringResource(
+                                if (isFavorite) R.string.cd_remove_favorite else R.string.cd_add_favorite,
+                            ),
                             tint = if (isFavorite) NeonPink else MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
@@ -104,7 +109,7 @@ fun AnimeCard(
                 if (anime.captionCount > 0) {
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "자막 ${anime.captionCount}개",
+                        pluralStringResource(R.plurals.caption_count, anime.captionCount, anime.captionCount),
                         style = MaterialTheme.typography.labelSmall,
                         color = Mint,
                     )
@@ -116,7 +121,7 @@ fun AnimeCard(
 
 @Composable
 private fun TimeBadge(anime: Anime) {
-    val label = if (anime.time.isBlank()) anime.week.label else anime.time
+    val label = if (anime.time.isBlank()) stringResource(anime.week.labelRes) else anime.time
     Box(
         Modifier
             .clip(RoundedCornerShape(8.dp))
@@ -143,7 +148,7 @@ private fun StatusDot(airing: Boolean) {
         )
         Spacer(Modifier.width(4.dp))
         Text(
-            if (airing) "방영중" else "휴방",
+            stringResource(if (airing) R.string.status_airing else R.string.status_break),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

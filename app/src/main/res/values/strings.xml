@@ -2,4 +2,69 @@
     <string name="app_name">애니타임</string>
     <string name="airing_channel_name">방영 알림</string>
     <string name="airing_channel_desc">찜한 애니메이션 방영 시작 알림</string>
+
+    <string name="day_sun">일</string>
+    <string name="day_mon">월</string>
+    <string name="day_tue">화</string>
+    <string name="day_wed">수</string>
+    <string name="day_thu">목</string>
+    <string name="day_fri">금</string>
+    <string name="day_sat">토</string>
+    <string name="day_other">기타</string>
+    <string name="day_new">신작</string>
+
+    <string name="notif_airing_title">곧 방영: %1$s</string>
+    <string name="notif_airing_text">오늘 %1$s 방영 예정이에요. 놓치지 마세요!</string>
+
+    <string name="nav_schedule">편성표</string>
+    <string name="nav_search">탐색</string>
+    <string name="nav_favorites">찜</string>
+    <string name="title_schedule">애니 편성표</string>
+    <string name="title_search">탐색</string>
+    <string name="title_favorites">내 찜 목록</string>
+
+    <string name="cd_add_favorite">찜하기</string>
+    <string name="cd_remove_favorite">찜 해제</string>
+    <string name="cd_favorite">찜</string>
+    <string name="cd_back">뒤로</string>
+    <string name="cd_clear">지우기</string>
+    <string name="cd_open_caption">자막 열기</string>
+
+    <string name="status_airing">방영중</string>
+    <string name="status_break">휴방</string>
+    <plurals name="caption_count">
+        <item quantity="other">자막 %1$d개</item>
+    </plurals>
+
+    <string name="action_retry">다시 시도</string>
+
+    <string name="detail_title">상세 정보</string>
+    <string name="detail_label_airing">방영</string>
+    <string name="detail_label_status">상태</string>
+    <string name="detail_label_period">기간</string>
+    <string name="detail_label_genre">장르</string>
+    <string name="detail_official_site">공식 홈페이지</string>
+    <string name="detail_captions_section">자막 제작</string>
+    <string name="detail_captions_empty">등록된 자막이 없어요.</string>
+    <string name="detail_episode_special">극장판/단편</string>
+    <string name="detail_episode_number">%1$s화</string>
+    <string name="detail_caption_pending">준비중</string>
+
+    <string name="favorites_empty_title">찜한 애니가 없어요</string>
+    <string name="favorites_empty_subtitle">편성표에서 하트를 눌러 찜하면\n방영 알림을 받을 수 있어요.</string>
+    <string name="favorites_notify_on">방영 10분 전 알림</string>
+    <string name="favorites_notify_unsupported">이 편성은 알림을 지원하지 않아요</string>
+
+    <string name="schedule_empty_title">편성작이 없어요</string>
+    <string name="schedule_empty_subtitle">다른 요일을 확인해 보세요.</string>
+
+    <string name="search_placeholder">애니 제목 검색</string>
+    <string name="search_empty_title">검색 결과가 없어요</string>
+    <string name="search_empty_subtitle">다른 제목이나 장르로 찾아보세요.</string>
+
+    <string name="error_schedule_load">편성표를 불러오지 못했어요. 네트워크를 확인해 주세요.</string>
+    <string name="error_data_load">데이터를 불러오지 못했어요.</string>
+    <string name="error_anime_not_found">애니 정보를 찾을 수 없어요.</string>
+    <string name="error_anime_load">애니 정보를 불러오지 못했어요.</string>
+    <string name="error_captions_load">자막 목록을 불러오지 못했어요.</string>
 </resources>

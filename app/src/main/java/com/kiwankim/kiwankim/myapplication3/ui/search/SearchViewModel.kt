@@ -2,6 +2,7 @@ package com.kiwankim.kiwankim.myapplication3.ui.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.data.AnimeRepository
 import com.kiwankim.kiwankim.myapplication3.domain.Anime
 import com.kiwankim.kiwankim.myapplication3.ui.UiState
@@ -75,7 +76,7 @@ class SearchViewModel(private val repository: AnimeRepository) : ViewModel() {
             _all.value = try {
                 UiState.Success(repository.allAnime())
             } catch (e: Exception) {
-                UiState.Error("데이터를 불러오지 못했어요.")
+                UiState.Error(R.string.error_data_load)
             }
         }
     }

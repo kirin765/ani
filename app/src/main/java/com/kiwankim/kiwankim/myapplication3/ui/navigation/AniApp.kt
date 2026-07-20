@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavType
@@ -51,7 +52,7 @@ fun AniApp(startAnimeNo: Int?) {
                 TopAppBar(
                     title = {
                         Text(
-                            topDestination?.appBarTitle() ?: "",
+                            topDestination?.titleRes?.let { stringResource(it) } ?: "",
                             fontWeight = FontWeight.ExtraBold,
                         )
                     },
@@ -77,8 +78,8 @@ fun AniApp(startAnimeNo: Int?) {
                                     restoreState = true
                                 }
                             },
-                            icon = { Icon(item.icon, contentDescription = item.label) },
-                            label = { Text(item.label) },
+                            icon = { Icon(item.icon, contentDescription = null) },
+                            label = { Text(stringResource(item.labelRes)) },
                         )
                     }
                 }
@@ -119,8 +120,3 @@ fun AniApp(startAnimeNo: Int?) {
     }
 }
 
-private fun TopDestination.appBarTitle(): String = when (this) {
-    TopDestination.Schedule -> "애니 편성표"
-    TopDestination.Search -> "탐색"
-    TopDestination.Favorites -> "내 찜 목록"
-}

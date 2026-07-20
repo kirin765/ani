@@ -49,8 +49,8 @@ object AiringNotifier {
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_airing)
-            .setContentTitle("곧 방영: $subject")
-            .setContentText("오늘 $time 방영 예정이에요. 놓치지 마세요!")
+            .setContentTitle(context.getString(R.string.notif_airing_title, subject))
+            .setContentText(context.getString(R.string.notif_airing_text, time))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .setContentIntent(pending)

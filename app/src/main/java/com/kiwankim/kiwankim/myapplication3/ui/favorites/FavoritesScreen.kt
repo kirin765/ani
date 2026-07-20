@@ -31,10 +31,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.data.local.FavoriteAnime
 import com.kiwankim.kiwankim.myapplication3.domain.Weekday
 import com.kiwankim.kiwankim.myapplication3.ui.AppViewModelProvider
@@ -51,7 +53,11 @@ fun FavoritesScreen(
 
     if (favorites.isEmpty()) {
         Column(modifier.fillMaxSize().padding(contentPadding)) {
-            EmptyState("💜", "찜한 애니가 없어요", "편성표에서 하트를 눌러 찜하면\n방영 알림을 받을 수 있어요.")
+            EmptyState(
+                "💜",
+                stringResource(R.string.favorites_empty_title),
+                stringResource(R.string.favorites_empty_subtitle),
+            )
         }
         return
     }
@@ -96,7 +102,7 @@ private fun FavoriteCard(
         Column(Modifier.padding(14.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    "${week.label} ${favorite.time}".trim(),
+                    "${stringResource(week.labelRes)} ${favorite.time}".trim(),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.primary,
                 )
@@ -104,7 +110,7 @@ private fun FavoriteCard(
                 IconButton(onClick = onRemove, modifier = Modifier.size(32.dp)) {
                     Icon(
                         Icons.Outlined.DeleteOutline,
-                        contentDescription = "찜 해제",
+                        contentDescription = stringResource(R.string.cd_remove_favorite),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
@@ -128,7 +134,10 @@ private fun FavoriteCard(
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
-                    if (canNotify) "방영 10분 전 알림" else "이 편성은 알림을 지원하지 않아요",
+                    stringResource(
+                        if (canNotify) R.string.favorites_notify_on
+                        else R.string.favorites_notify_unsupported,
+                    ),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

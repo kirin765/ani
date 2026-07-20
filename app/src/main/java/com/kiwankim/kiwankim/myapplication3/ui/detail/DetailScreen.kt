@@ -39,10 +39,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.domain.Anime
 import com.kiwankim.kiwankim.myapplication3.domain.Caption
 import com.kiwankim.kiwankim.myapplication3.ui.AppViewModelProvider
@@ -68,10 +70,10 @@ fun DetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("상세 정보") },
+                title = { Text(stringResource(R.string.detail_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "뒤로")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.cd_back))
                     }
                 },
                 actions = {
@@ -79,7 +81,7 @@ fun DetailScreen(
                         IconButton(onClick = viewModel::toggleFavorite) {
                             Icon(
                                 if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                                contentDescription = "찜",
+                                contentDescription = stringResource(R.string.cd_favorite),
                                 tint = if (isFavorite) NeonPink else MaterialTheme.colorScheme.onSurface,
                             )
                         }
@@ -93,7 +95,7 @@ fun DetailScreen(
     ) { padding ->
         when (val s = animeState) {
             is UiState.Loading -> LoadingState(Modifier.padding(padding))
-            is UiState.Error -> ErrorState(s.message, onRetry = { viewModel.load(animeNo) }, Modifier.padding(padding))
+            is UiState.Error -> ErrorState(s.messageRes, onRetry = { viewModel.load(animeNo) }, Modifier.padding(padding))
             is UiState.Success -> DetailContent(
                 anime = s.data,
                 captionsState = captionsState,
@@ -138,19 +140,25 @@ private fun DetailContent(anime: Anime, captionsState: UiState<List<Caption>>, m
                 shape = RoundedCornerShape(16.dp),
             ) {
                 Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    InfoRow("방영", "${anime.week.label} ${anime.time}".trim())
-                    InfoRow("상태", if (anime.airing) "방영중" else "휴방")
+                    InfoRow(
+                        stringResource(R.string.detail_label_airing),
+                        "${stringResource(anime.week.labelRes)} ${anime.time}".trim(),
+                    )
+                    InfoRow(
+                        stringResource(R.string.detail_label_status),
+                        stringResource(if (anime.airing) R.string.status_airing else R.string.status_break),
+                    )
                     if (anime.startDate.isNotBlank()) {
-                        InfoRow("기간", listOf(anime.startDate, anime.endDate).filter { it.isNotBlank() }.joinToString(" ~ "))
+                        InfoRow(stringResource(R.string.detail_label_period), listOf(anime.startDate, anime.endDate).filter { it.isNotBlank() }.joinToString(" ~ "))
                     }
                     if (anime.genres.isNotEmpty()) {
-                        Text("장르", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.detail_label_genre), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             anime.genres.forEach { GenreChip(it) }
                         }
                     }
                     if (anime.website.isNotBlank()) {
-                        LinkRow("공식 홈페이지") { open(anime.website) }
+                        LinkRow(stringResource(R.string.detail_official_site)) { open(anime.website) }
                     }
                 }
             }
@@ -158,7 +166,7 @@ private fun DetailContent(anime: Anime, captionsState: UiState<List<Caption>>, m
 
         item {
             Text(
-                "자막 제작",
+                stringResource(R.string.detail_captions_section),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.padding(top = 8.dp),
@@ -167,10 +175,10 @@ private fun DetailContent(anime: Anime, captionsState: UiState<List<Caption>>, m
 
         when (val cs = captionsState) {
             is UiState.Loading -> item { Spacer(Modifier.height(8.dp)); LoadingState(Modifier.height(80.dp)) }
-            is UiState.Error -> item { Text(cs.message, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+            is UiState.Error -> item { Text(stringResource(cs.messageRes), color = MaterialTheme.colorScheme.onSurfaceVariant) }
             is UiState.Success -> {
                 if (cs.data.isEmpty()) {
-                    item { Text("등록된 자막이 없어요.", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                    item { Text(stringResource(R.string.detail_captions_empty), color = MaterialTheme.colorScheme.onSurfaceVariant) }
                 } else {
                     items(cs.data) { caption -> CaptionRow(caption, onOpen = { open(caption.website) }) }
                 }
@@ -222,7 +230,8 @@ private fun CaptionRow(caption: Caption, onOpen: () -> Unit) {
         Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(
-                    if (caption.episode == "0") "극장판/단편" else "${caption.episode}화",
+                    if (caption.episode == "0") stringResource(R.string.detail_episode_special)
+                    else stringResource(R.string.detail_episode_number, caption.episode),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
@@ -236,11 +245,11 @@ private fun CaptionRow(caption: Caption, onOpen: () -> Unit) {
             if (hasLink) {
                 Icon(
                     Icons.AutoMirrored.Filled.OpenInNew,
-                    contentDescription = "자막 열기",
+                    contentDescription = stringResource(R.string.cd_open_caption),
                     tint = MaterialTheme.colorScheme.primary,
                 )
             } else {
-                Text("준비중", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.detail_caption_pending), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }

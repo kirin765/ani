@@ -2,6 +2,7 @@ package com.kiwankim.kiwankim.myapplication3.ui.schedule
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.data.AnimeRepository
 import com.kiwankim.kiwankim.myapplication3.domain.Anime
 import com.kiwankim.kiwankim.myapplication3.domain.Weekday
@@ -44,7 +45,7 @@ class ScheduleViewModel(private val repository: AnimeRepository) : ViewModel() {
             _uiState.value = try {
                 UiState.Success(repository.schedule(week, forceRefresh))
             } catch (e: Exception) {
-                UiState.Error("편성표를 불러오지 못했어요. 네트워크를 확인해 주세요.")
+                UiState.Error(R.string.error_schedule_load)
             }
         }
     }

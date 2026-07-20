@@ -15,10 +15,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.domain.Weekday
 import com.kiwankim.kiwankim.myapplication3.ui.AppViewModelProvider
 import com.kiwankim.kiwankim.myapplication3.ui.UiState
@@ -54,7 +56,7 @@ fun ScheduleScreen(
                     onClick = { viewModel.selectWeek(week) },
                     text = {
                         Text(
-                            week.label,
+                            stringResource(week.labelRes),
                             fontWeight = if (index == selectedIndex) FontWeight.Bold else FontWeight.Normal,
                         )
                     },
@@ -64,10 +66,14 @@ fun ScheduleScreen(
 
         when (val s = state) {
             is UiState.Loading -> LoadingState()
-            is UiState.Error -> ErrorState(s.message, onRetry = viewModel::refresh)
+            is UiState.Error -> ErrorState(s.messageRes, onRetry = viewModel::refresh)
             is UiState.Success -> {
                 if (s.data.isEmpty()) {
-                    EmptyState("🍥", "편성작이 없어요", "다른 요일을 확인해 보세요.")
+                    EmptyState(
+                        "🍥",
+                        stringResource(R.string.schedule_empty_title),
+                        stringResource(R.string.schedule_empty_subtitle),
+                    )
                 } else {
                     LazyColumn(
                         contentPadding = PaddingValues(16.dp),

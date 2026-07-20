@@ -2,6 +2,7 @@ package com.kiwankim.kiwankim.myapplication3.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kiwankim.kiwankim.myapplication3.R
 import com.kiwankim.kiwankim.myapplication3.data.AnimeRepository
 import com.kiwankim.kiwankim.myapplication3.domain.Anime
 import com.kiwankim.kiwankim.myapplication3.domain.Caption
@@ -34,16 +35,16 @@ class DetailViewModel(private val repository: AnimeRepository) : ViewModel() {
         viewModelScope.launch {
             _anime.value = try {
                 repository.findAnime(no)?.let { UiState.Success(it) }
-                    ?: UiState.Error("애니 정보를 찾을 수 없어요.")
+                    ?: UiState.Error(R.string.error_anime_not_found)
             } catch (e: Exception) {
-                UiState.Error("애니 정보를 불러오지 못했어요.")
+                UiState.Error(R.string.error_anime_load)
             }
         }
         viewModelScope.launch {
             _captions.value = try {
                 UiState.Success(repository.captions(no))
             } catch (e: Exception) {
-                UiState.Error("자막 목록을 불러오지 못했어요.")
+                UiState.Error(R.string.error_captions_load)
             }
         }
     }
