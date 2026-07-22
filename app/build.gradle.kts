@@ -15,14 +15,14 @@ val keystoreProperties = Properties().apply {
 
 android {
     namespace = "com.kiwankim.kiwankim.myapplication3"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.kiwankim.kiwankim.myapplication3"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 2
-        versionName = "1.1"
+        targetSdk = 36
+        versionCode = 3
+        versionName = "1.2"
         vectorDrawables { useSupportLibrary = true }
     }
 
